@@ -11,6 +11,8 @@ class grafana::config {
         file {  $::grafana::cfg_location:
           ensure  => present,
           content => template('grafana/config.ini.erb'),
+          owner   => 'grafana',
+          group   => 'grafana',
         }
       }
     }
@@ -20,6 +22,8 @@ class grafana::config {
       file {  $::grafana::cfg_location:
         ensure  => present,
         content => template('grafana/config.ini.erb'),
+        owner   => 'grafana',
+        group   => 'grafana',
       }
     }
     'archive': {
@@ -28,6 +32,8 @@ class grafana::config {
       file { "${::grafana::install_dir}/conf/custom.ini":
         ensure  => present,
         content => template('grafana/config.ini.erb'),
+        owner   => 'grafana',
+        group   => 'grafana',
       }
     }
     default: {
@@ -40,6 +46,8 @@ class grafana::config {
     file { '/etc/grafana/ldap.toml':
       ensure  => present,
       content => inline_template("<%= require 'toml'; TOML::Generator.new(@ldap_cfg).body %>\n"),
+      owner   => 'grafana',
+      group   => 'grafana',
     }
   }
 }
